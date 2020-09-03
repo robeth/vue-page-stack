@@ -19,7 +19,7 @@ module.exports = {
     // 去除函数括号前的空格缩进
     'space-before-function-paren': 0,
     // 箭头函数只有一个参数的情况下可以省略括号
-    'arrow-parens': ['error', 'as-needed'],
+    'arrow-parens': ['error', 'always'],
     // allow async-await
     'generator-star-spacing': 'off',
     'no-debugger': 'error',

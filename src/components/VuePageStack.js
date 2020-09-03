@@ -31,7 +31,7 @@ function getIndexByKey(key) {
   return -1;
 }
 
-let VuePageStack = keyName => {
+let VuePageStack = (keyName) => {
   return {
     name: config.componentName,
     abstract: true,
@@ -65,9 +65,15 @@ let VuePageStack = keyName => {
       } else {
         if (history.action === config.replaceName) {
           // destroy the instance
-          stack[stack.length - 1].vnode.componentInstance.$destroy();
-          stack[stack.length - 1] = null;
-          stack.splice(stack.length - 1);
+          if (
+            stack.length > 0 &&
+            stack[stack.length - 1].vnode &&
+            stack[stack.length - 1].vnode.componentInstance
+          ) {
+            stack[stack.length - 1].vnode.componentInstance.$destroy();
+            stack[stack.length - 1] = null;
+            stack.splice(stack.length - 1);
+          }
         }
         stack.push({ key, vnode });
       }

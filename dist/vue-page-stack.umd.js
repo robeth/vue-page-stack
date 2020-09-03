@@ -886,7 +886,7 @@ module.exports = function (exec) {
 /***/ "8378":
 /***/ (function(module, exports) {
 
-var core = module.exports = { version: '2.6.9' };
+var core = module.exports = { version: '2.6.11' };
 if (typeof __e == 'number') __e = core; // eslint-disable-line no-undef
 
 
@@ -1465,6 +1465,7 @@ module.exports = document && document.documentElement;
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
+// ESM COMPAT FLAG
 __webpack_require__.r(__webpack_exports__);
 
 // CONCATENATED MODULE: ./node_modules/@vue/cli-service/lib/commands/build/setPublicPath.js
@@ -1584,9 +1585,11 @@ var VuePageStack_VuePageStack = function VuePageStack(keyName) {
       } else {
         if (src_history.action === config.replaceName) {
           // destroy the instance
-          stack[stack.length - 1].vnode.componentInstance.$destroy();
-          stack[stack.length - 1] = null;
-          stack.splice(stack.length - 1);
+          if (stack.length > 0 && stack[stack.length - 1].vnode && stack[stack.length - 1].vnode.componentInstance) {
+            stack[stack.length - 1].vnode.componentInstance.$destroy();
+            stack[stack.length - 1] = null;
+            stack.splice(stack.length - 1);
+          }
         }
 
         stack.push({
